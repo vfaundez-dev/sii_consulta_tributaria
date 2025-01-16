@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --bg-dark: #1a1a1a;
+  --bg-darker: #0f0f0f;
+  --bg-accent: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --border-color: #333333;
+  --button-color: #2c3e50;
+  --button-hover: #34495e;
+  --amber-light: #ffd54f;
+  --amber-dark: #ffb300;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --input-focus-bg: #2c3e50;
+  --input-focus-border: #3498db;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', serif;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+.container {
+  width: 70%;
+  margin: 2rem auto;
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px var(--shadow-color);
+}
+
+.header {
+  background-color: var(--bg-accent);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  color: #C5BAFF;
+}
+
+.content {
+  display: flex;
+  min-height: 500px;
+}
+
+.code-section {
+  width: 60%;
+  height: 500px; /* Fixed height */
+  padding: 1rem;
+  background-color: var(--bg-darker);
+  border-right: 1px solid var(--border-color);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin: 1rem;
+  overflow: auto; /* Enable scrolling */
+}
+
+pre {
+  margin: 0;
+  height: 100%;
+  background-color: var(--bg-darker);
+}
+
+code {
+  color: var(--amber-light);
+  font-family: 'Fira Code', serif;
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.info-section {
+  width: 40%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-section h2 {
+  font-size: 18px;
+  color: #E8F9FF;
+  margin-top: 0;
+}
+
+.info-section p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.search-form {
+  background-color: var(--bg-accent);
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin-top: 2rem;
+}
+
+.form-title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.form-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group input {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+}
+
+input[name="rut"] {
+  width: 70%;
+}
+
+input[name="dv"] {
+  width: 30%;
+}
+
+input::placeholder {
+  color: #FBFBFB;
+  opacity: 0.5;
+}
+
+.form-group input:focus {
+  outline: none;
+  background-color: var(--input-focus-bg);
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+  transition: all 0.3s ease;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--button-color);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+.footer {
+  font-size: 0.6rem;
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: right;
+  margin: 1rem 0;
+}
+
+.link-button {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-accent);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.link-button:hover {
+    background-color: var(--button-hover);
+}
+
+.link-button svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 0.5rem;
+    fill: currentColor;
+}
