@@ -35,7 +35,6 @@ class RequestSiiController extends Controller {
 
       $json = json_decode($response->getBody()->getContents(), true);
 
-      // Verificar si los datos esperados están presentes
       if (!isset($json["txtCaptcha"])) return null;
 
       $code = substr(base64_decode($json["txtCaptcha"]), 36, 4);
@@ -44,17 +43,13 @@ class RequestSiiController extends Controller {
       return [$code, $captcha];
 
     } catch (\GuzzleHttp\Exception\RequestException $e) {
-        // Registrar el error relacionado con la solicitud HTTP
-        Log::error("Error al realizar la solicitud: " . $e->getMessage(), [
-            'exception' => $e
-        ]);
-        return null;
+      // Registrar el error relacionado con la solicitud HTTP
+      Log::error("Error al realizar la solicitud: " . $e->getMessage(), [ 'exception' => $e ]);
+      return null;
     } catch (\Exception $e) {
-        // Registrar cualquier otro tipo de error
-        Log::error("Ocurrió un error al procesar el captcha: " . $e->getMessage(), [
-            'exception' => $e
-        ]);
-        return null;
+      // Registrar cualquier otro tipo de error
+      Log::error("Ocurrió un error al procesar el captcha: " . $e->getMessage(), [ 'exception' => $e ]);
+      return null;
     }
 	}
 
