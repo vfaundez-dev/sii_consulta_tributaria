@@ -7,7 +7,7 @@ form.addEventListener('submit', (e) => {
 
 async function getDataSII(dataForm) {
   const dataSII = document.getElementById('dataSII');
-  const resp = await fetch('/api/search', {
+  const resp = await fetch('/api/consultar', {
     method: 'POST',
     body: dataForm
   });

@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/consulta', [RequestSiiController::class, 'fetchSiiData'])->name('api.fetchsii');
+Route::post('/consultar', [RequestSiiController::class, 'fetchSiiData'])->name('api.fetchsii');
