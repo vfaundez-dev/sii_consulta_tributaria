@@ -23,7 +23,7 @@
 
         <p class="description">
           Esta API permite realizar una consulta directa a SII sin utilizar captchas.
-          La información se despliega en formato JSON y muestra razón social, actividades y documentos timbrados.
+          La información se despliega en formato JSON y muestra la información principal entregada en la web de SII (Zeus).
         </p>
         <p class="description">
           Para utilizar esta API, puedes hacerlo directo desde este formulario, o utilizando una llamada POST a la ruta

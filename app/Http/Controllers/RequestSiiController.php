@@ -99,16 +99,59 @@ class RequestSiiController extends Controller {
 		try {
 
 			$razonSocial = '';
+			$rut = '';
+			$inicioActividades = '';
+			$fechaInicioActividades = '';
+			$pagarMonedaExtranjera = '';
+			$esEmpresaMenorTamano = '';
 			$actividades = [];
 			$timbrados = [];
 
 			$documento = \phpQuery::newDocument($html);
 
 			// Extrae razón social
-			$razonSocialNode = $documento->find('body > div > div:nth-child(4)');
-			$razonSocial = $razonSocialNode->length > 0 
+			$elRazonSocial = $documento->find('strong:contains("Nombre o Razón Social")');
+			if ($elRazonSocial->length > 0) {
+				$parentDiv = $elRazonSocial->parent();
+				$razonSocialNode = $parentDiv->next('div');
+				$razonSocial = $razonSocialNode->length > 0 
 					? ucwords(strtolower(trim($razonSocialNode->text())))
 					: null;
+			}
+
+			// Extrae RUT
+			$elRut = $documento->find('b:contains("RUT Contribuyente")');
+			if ($elRut->length > 0) {
+				$parentDiv = $elRut->parent();
+				$rutNode = $parentDiv->next('div');
+				$rut = $rutNode->length > 0 
+					? ucwords(strtolower(trim($rutNode->text())))
+					: null;
+			}
+
+			// Extrae Inicio Actividades
+			$inicioActividadesNode = $documento->find('span:contains("Contribuyente presenta Inicio de Actividades")');
+			$inicioActividades = $inicioActividadesNode->length > 0 
+				? explode( ': ', ucwords(strtolower(trim($inicioActividadesNode->text()))) )[1]
+				: null;
+
+			// Extrae Fecha Inicio Actividades
+			$fechaInicioActividadesNode = $documento->find('span:contains("Fecha de Inicio de Actividades")');
+			$fechaInicioActividades = $fechaInicioActividadesNode->length > 0 
+				? explode( ': ', ucwords(strtolower(trim($fechaInicioActividadesNode->text()))) )[1]
+				: null;
+
+			// Extrae Paga en moneda extranjera
+			$pagarMonedaExtranjeraNode = $documento->find('span:contains("moneda extranjera")');
+			$pagarMonedaExtranjera = $pagarMonedaExtranjeraNode->length > 0 
+				? explode( ': ', ucwords(strtolower(trim($pagarMonedaExtranjeraNode->text()))) )[1]
+				: null;
+
+			// Es empresa de menor tamaño
+			$esEmpresaMenorTamanoNode = $documento->find('span:contains("Empresa de Menor Tamaño")');
+			$esEmpresaMenorTamano = $esEmpresaMenorTamanoNode->length > 0 
+				? explode( ': ', ucwords(strtolower(trim($esEmpresaMenorTamanoNode->text()))) )[1]
+				: null;
 
 			// Recorre las filas de la tabla actividades
 			$strongActividades = $documento->find('strong:contains("Actividades")');
@@ -144,9 +187,14 @@ class RequestSiiController extends Controller {
 			}
 
 			return [
-					'razonSocial' => $razonSocial,
-					'actividades' => $actividades,
-					'documentos timbrados' => $timbrados,
+				'razonSocial' => $razonSocial,
+				'RUT' => $rut,
+				'inicio actividades' => $inicioActividades,
+				'fecha inicio actividades' => $fechaInicioActividades,
+				'autorizado pagar con moneda extranjera' => $pagarMonedaExtranjera,
+				'es empresa de menor tamaño' => $esEmpresaMenorTamano,
+				'actividades' => $actividades,
+				'documentos timbrados' => $timbrados,
 			];
 
 		} catch (\Exception $e) {
