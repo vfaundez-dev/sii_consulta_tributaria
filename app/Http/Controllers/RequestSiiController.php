@@ -111,29 +111,35 @@ class RequestSiiController extends Controller {
 					: null;
 
 			// Recorre las filas de la tabla actividades
-			$actividadRows = $documento->find('table.tabla')->eq(0)->find('tr');
-			foreach ($actividadRows as $i => $row) {
-				if ($i > 0) { // Ignora la cabecera
-					$rowNode = pq($row);
-					$actividades[] = [
-						'giro'      => trim($rowNode->find('td:nth-child(1) font')->text()),
-						'codigo'    => (int)trim($rowNode->find('td:nth-child(2) font')->text()),
-						'categoria' => trim($rowNode->find('td:nth-child(3) font')->text()),
-						'afecta'    => trim($rowNode->find('td:nth-child(4) font')->text()),
-						'fecha'     => trim($rowNode->find('td:nth-child(5) font')->text()),
-					];
+			$strongActividades = $documento->find('strong:contains("Actividades")');
+			if ($strongActividades->length > 0) {
+				$actividadRows = $strongActividades->nextAll('table.tabla')->eq(0)->find('tr');
+				foreach ($actividadRows as $i => $row) {
+					if ($i > 0) { // Ignora la cabecera
+						$rowNode = pq($row);
+						$actividades[] = [
+							'giro'      => trim($rowNode->find('td:nth-child(1) font')->text()),
+							'codigo'    => (int)trim($rowNode->find('td:nth-child(2) font')->text()),
+							'categoria' => trim($rowNode->find('td:nth-child(3) font')->text()),
+							'afecta'    => trim($rowNode->find('td:nth-child(4) font')->text()),
+							'fecha'     => trim($rowNode->find('td:nth-child(5) font')->text()),
+						];
+					}
 				}
 			}
 
-			// Recorre las filas de la tabla actividades
-			$timbradoRows = $documento->find('table.tabla')->eq(1)->find('tr');
-			foreach ($timbradoRows as $i => $row) {
-				if ($i > 0) { // Ignora la cabecera
-					$rowNode = pq($row);
-					$timbrados[] = [
-						'documento'             => trim($rowNode->find('td:nth-child(1) font')->text()),
-						'anio ultimo timbraje'  => (int)trim($rowNode->find('td:nth-child(2) font')->text()),
-					];
+			// Recorre las filas de la tabla Documentos Timbrados
+			$strongTimbrados = $documento->find('strong:contains("Timbrados")');
+			if ($strongTimbrados->length > 0) {
+				$timbradoRows = $strongTimbrados->nextAll('table.tabla')->eq(0)->find('tr');
+				foreach ($timbradoRows as $i => $row) {
+					if ($i > 0) { // Ignora la cabecera
+						$rowNode = pq($row);
+						$timbrados[] = [
+							'documento'             => trim($rowNode->find('td:nth-child(1) font')->text()),
+							'anio ultimo timbraje'  => (int)trim($rowNode->find('td:nth-child(2) font')->text()),
+						];
+					}
 				}
 			}
 
