@@ -27,7 +27,7 @@ body {
 
 .container {
   width: 70%;
-  margin: 1.2rem auto;
+  margin: 1rem auto;
   background-color: var(--bg-dark);
   border: 1px solid var(--border-color);
   border-radius: 8px;
