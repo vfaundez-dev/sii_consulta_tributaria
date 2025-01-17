@@ -10,7 +10,7 @@
   <div class="container">
 
     <header class="header">
-      <h1>VFH API - SII Consulta Tributaria</h1>
+      <h1>VFH API - Consulta Tributaria a SII Chile</h1>
     </header>
     {{-- Content --}}
     <div class="content">
@@ -23,7 +23,7 @@
 
         <p class="description">
           Esta API permite realizar una consulta directa a SII sin utilizar captchas.
-          La información se despliega en formato JSON y muestra la información principal entregada en la web de SII (Zeus).
+          Los datos se despliegan en formato JSON y muestra la información principal entregada en la web de SII de Chile (Zeus).
         </p>
         <p class="description">
           Para utilizar esta API, puedes hacerlo directo desde este formulario, o utilizando una llamada POST a la ruta
