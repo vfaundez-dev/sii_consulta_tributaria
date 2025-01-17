@@ -14,15 +14,17 @@ class RequestSiiController extends Controller {
 		$this->client = new Client();
 	}
     
-  public function fetchSiiData() {
+  public function fetchSiiData(Request $request) {
+
+		$data = $request->only(['rut', 'dv']);
 
 		$captcha = $this->fetchCaptcha();
 		if (!$captcha) return $this->sendRequestMsg('error', 'Error obteniendo Captcha', []);
 
-		$dataSii = $this->fetchData('15417646', '2', $captcha);
+		$dataSii = $this->fetchData($data['rut'], $data['dv'], $captcha);
 		$parsedData = $this->parseDataHtml($dataSii);
 
-		return $this->sendRequestMsg('success', 'Prueba completa', $parsedData);
+		return $this->sendRequestMsg('success', 'Proceso completado', $parsedData);
     
   }
 

@@ -21,23 +21,27 @@
 
       <div class="info-section">
 
-        <h2>Sistema de consulta automática a SII sobre información tributaria de terceros.</h2>
-        <p>
-          Esta API permite realizar una consulta directa a SII sin pasar por autenticaciones o el formulario que disponen.
-          La información se despliega en formato JSON y muestra todo el contenido que entrega SII.
+        <p class="description">
+          Esta API permite realizar una consulta directa a SII sin utilizar captchas.
+          La información se despliega en formato JSON y muestra razón social, actividades y documentos timbrados.
+        </p>
+        <p class="description">
+          Para utilizar esta API, puedes hacerlo directo desde este formulario, o utilizando una llamada POST a la ruta
+          <code>/api/consulta</code> proporcionando en el body los párametros <code>rut y dv</code> (debe ser rut válido).
         </p>
             
         <div class="search-form">
           <h4 class="form-title">BUSCAR</h3>
           <form id="searchSII" method="POST">
             @csrf
-            <small>Solo numeros, sin puntos ni guión</small>
             <div class="form-group">
-              <input type="text" name="rut" placeholder="RUT" min="7" max="8" autocomplete="off">
-              <input type="text" name="dv" placeholder="DV" min="1" max="1" autocomplete="off">
+              <input type="text" id="rut" name="rut" placeholder="RUT" min="7" max="8" autocomplete="off" required>
+              <input type="text" id="rut" name="dv" placeholder="DV" min="1" max="1" autocomplete="off" required>
             </div>
-            <button type="submit">ENVIAR</button>
+            <div id="formMsg">Solo numeros, sin puntos ni guión</div>
+            <button id="btnSubmit" type="submit">ENVIAR</button>
           </form>
+          
         </div>
 
         <div class="button-container">
